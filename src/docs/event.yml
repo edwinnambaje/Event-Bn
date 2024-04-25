@@ -1,0 +1,184 @@
+/event/create:
+  post:
+    tags:
+      - Event
+    summary: Create Event
+    description: Create a new event
+    security:
+      - bearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: Event Title
+              description:
+                type: string
+                example: Event Description
+              location:
+                type: string
+                example: Event Location
+              date:
+                type: string
+                example: 2021-12-12
+              time:
+                type: string
+                example: 12:00
+              availableTickets:
+                type: number
+                example: 100
+              price:
+                type: number
+                example: 100
+            required:
+              - title
+              - description
+              - location
+              - date
+              - time
+    responses:
+      "201":
+        description: Event created successfully
+      "400":
+        description: Event with that title already Exists
+      "401":
+        description: "Unauthorized"
+      "500":
+        description: Internal Server error
+/event/all:
+  get:
+    tags:
+      - Event
+    summary: Get all Events
+    description: Get all events
+    responses:
+      "200":
+        description: Events retrieved successfully
+      "401":
+        description: "Unauthorized"
+      "500":
+        description: Internal Server error
+/event/single/{id}:
+  get:
+    tags:
+      - Event
+    summary: Get single Event
+    description: Get single event
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the event to get
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Event retrieved successfully
+      "404":
+        description: "Event not found"
+      "500":
+        description: Internal Server error
+/event/update/{id}:
+  put:
+    tags:
+      - Event
+    summary: Update Event
+    description: Update an event
+    security:
+      - bearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the event to update
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Event Title
+              description:
+                type: string
+                example: Event Description
+              location:
+                type: string
+                example: Event Location
+              date:
+                type: string
+                example: 2021-12-12
+              time:
+                type: string
+                example: 12:00
+            required:
+              - title
+              - description
+              - location
+              - date
+              - time
+    responses:
+      "200":
+        description: Event updated successfully
+      "400":
+        description: Event with that title already Exists
+      "401":
+        description: "Unauthorized"
+      "404":
+        description: "Event not found"
+      "500":
+        description: Internal Server error
+/event/delete/{id}:
+  delete:
+    tags:
+      - Event
+    summary: Delete Event
+    description: Delete an event
+    security:
+      - bearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the event to delete
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Event deleted successfully
+      "401":
+        description: "Unauthorized"
+      "404":
+        description: "Event not found"
+      "500":
+        description: Internal Server error   
+/event/attendees/{id}:
+  get:
+    tags:
+      - Event
+    summary: Get Event Attendees
+    description: Get all attendees of an event
+    security:
+      - bearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the event to get attendees
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Attendees retrieved successfully
+      "404":
+        description: "Event not found"
+      "500":
+        description: Internal Server error

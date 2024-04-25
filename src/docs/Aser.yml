@@ -1,0 +1,198 @@
+/user/register:
+  post:
+    tags:
+      - Authentication
+    summary: register new user
+    description: Register a new user. This will create a new account for the user in database
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+                example: Nambaje
+              lastName:
+                type: string
+                example: Edwin
+              email:
+                type: string
+                format: email
+                example: nambajeeedwin@gmail.com
+              phoneNumber:
+                type: string
+                example: "250788533098"
+              password:
+                type: string
+                example: 123@Pass
+            required:
+              - firstName
+              - lastName
+              - email
+    responses:
+      "201":
+        description: Registered successfully
+      "400":
+        description: User with that email or phoneNumber already Exists
+      "500":
+        description: Internal Server error
+
+/user/login:
+  post:
+    tags:
+      - Authentication
+    summary: login
+    description: login with email or PhoneNumber and password
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              identifier:
+                type: string
+                format: email
+                example: nambajedwin@gmail.com
+              password:
+                type: string
+                example: 123@Pass
+            required:
+              - identifier
+              - password
+    responses:
+      "200":
+        description: Logged in successfully!
+      "400":
+        description: Invalid email or password
+      "500":
+        description: Internal Server error
+/user/profile:
+  get:
+    tags:
+      - Users
+    summary: Get user profile
+    description: Get user profile
+    security:
+      - bearerAuth: []
+    responses:
+      "200":
+        description: Successful operation
+      "401":
+        description: Unauthorized
+      "500":
+        description: Internal Server Error
+/user/update-profile:
+  put:
+    tags:
+      - Users
+    summary: Update user profile
+    description: Update user profile
+    security:
+      - bearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+                example: Nambaje
+              lastName:
+                type: string
+                example: Edwin
+              email:
+                type: string
+                format: email
+                example: nambajeeedwin@gmail.com
+              phoneNumber:
+                type: string
+                example: "250787415987"
+            required:   
+              - firstName
+              - lastName
+              - email
+              - phoneNumber
+    responses:  
+      "200":
+        description: Successful operation
+      "400":
+        description: Bad Request
+      "401":
+        description: Unauthorized
+      "500":
+        description: Internal Server Error
+/auth/change-password:
+  put:
+    tags:
+      - Users
+    summary: Change password
+    description: Change password
+    security:
+      - bearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              oldPassword:
+                type: string
+                example: 123@Pass
+              newPassword:
+                type: string
+                example: 123@Pass
+            required:
+              - oldPassword
+              - newPassword
+    responses:
+      "200":
+        description: Successful operation
+      "400":
+        description: Bad Request
+      "401":
+        description: Unauthorized
+      "500":
+        description: Internal Server Error
+/user/all:
+  get:
+    tags:
+      - Users
+    summary: Get all users
+    description: Get all users
+    security:
+      - bearerAuth: []
+    responses:
+      "200":
+        description: Successful operation
+      "401":
+        description: Unauthorized
+      "500":
+        description: Internal Server Error
+/user/{id}:
+  get:
+    tags:
+      - Users
+    summary: Get user by id
+    description: Get user by id
+    security:
+      - bearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of user to return
+    responses:
+      "200":
+        description: Successful operation
+      "400":
+        description: Bad Request
+      "401":
+        description: Unauthorized
+      "500":
+        description: Internal Server Error
