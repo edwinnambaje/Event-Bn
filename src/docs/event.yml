@@ -9,37 +9,51 @@
     requestBody:
       required: true
       content:
-        application/json:
+        multipart/form-data:
           schema:
             type: object
             properties:
               name:
                 type: string
-                example: Event Title
+                example: Event Name
+                description: Name of the event
               description:
                 type: string
                 example: Event Description
+                description: Description of the event
               location:
                 type: string
                 example: Event Location
+                description: Location of the event
               date:
                 type: string
                 example: 2021-12-12
+                description: Date of the event
               time:
                 type: string
                 example: 12:00
+                description: Time of the event
               availableTickets:
                 type: number
                 example: 100
+                description: Number of available tickets
               price:
                 type: number
                 example: 100
+                description: Price of the event
+              image:
+                type: string
+                format: binary
+                description: Image of the event
             required:
-              - title
+              - name
               - description
               - location
               - date
               - time
+              - availableTickets
+              - price
+              - image
     responses:
       "201":
         description: Event created successfully

@@ -1,23 +1,53 @@
 import model from '../database/models';
-import EventService from '../services/event.service';
+import cloudinary from '../helpers/cloudinary';
 
 const { Event, User, Booking } = model;
 
 class EventController {
   static async createEvent(req, res) {
     try {
-      const { message400, data } = await EventService.createEvent(req.body);
-      if (message400) {
+      const {
+        name,
+        description,
+        location,
+        date,
+        time,
+        availableTickets,
+        price,
+      } = req.body;
+      console.log(req.file);
+      const existingEvent = await Event.findOne({ where: { name } });
+      if (existingEvent) {
         return res.status(400).json({
           status: 'fail',
-          message: message400,
+          message: 'Event already exists',
         });
       }
+      let posterUrl;
+      if (req.file !== undefined) {
+        const file = req.file.path;
+        const link = await cloudinary.uploader.unsigned_upload(
+          file,
+          'swtlatfg',
+        );
+        posterUrl = link.secure_url;
+      }
+      const event = await Event.create({
+        name,
+        description,
+        location,
+        date,
+        time,
+        image: posterUrl,
+        availableTickets,
+        price,
+      });
       return res.status(201).json({
         status: 'success',
-        data,
+        data: event,
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         status: 'error',
         error: error.message,

@@ -3,12 +3,14 @@ import EventController from '../controllers/event.controller';
 import isAuthenticated from '../helpers/verifyToken';
 import checkRole from '../middlewares/checkRole';
 import eventValidate from '../middlewares/event.validate';
+import upload from '../helpers/multer';
 
 const router = express.Router();
 router.post(
   '/create',
   isAuthenticated,
   checkRole('admin'),
+  upload.single('image'),
   eventValidate,
   EventController.createEvent,
 );

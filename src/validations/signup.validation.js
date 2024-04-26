@@ -6,7 +6,16 @@ async function SignUpValidation(data) {
     lastName: joi.string().min(3).required().label('lastName'),
     email: joi.string().email().label('email'),
     phoneNumber: joi.number().required().label('phoneNumber'),
-    password: joi.string().min(8).required().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})')).label('password'),
+    password: joi
+      .string()
+      .min(8)
+      .required()
+      .pattern(
+        new RegExp(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
+        ),
+      )
+      .label('password'),
   });
 
   return await schema.validate(data, {

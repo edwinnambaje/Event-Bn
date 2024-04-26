@@ -23,6 +23,8 @@ module.exports = {
           date: '2024-12-25',
           time: '17:20:30',
           location: 'Kigali Convention Center',
+          image:
+            'https://res.cloudinary.com/dryzqdtj6/image/upload/v1714129344/trf796wgnvkwmn5jqjkq.jpg',
           availableTickets: 1000,
           price: 4000,
           isAvailable: true,
@@ -34,6 +36,8 @@ module.exports = {
           name: 'Event 2',
           description: 'Description 2',
           date: '2024-07-25',
+          image:
+            'https://res.cloudinary.com/dryzqdtj6/image/upload/v1714129344/trf796wgnvkwmn5jqjkq.jpg',
           time: '15:00:00',
           location: 'Kigali Arena',
           availableTickets: 2000,
@@ -50,6 +54,8 @@ module.exports = {
           time: '16:20:30',
           location: 'Kigali Stadium',
           availableTickets: 3000,
+          image:
+            'https://res.cloudinary.com/dryzqdtj6/image/upload/v1714129344/trf796wgnvkwmn5jqjkq.jpg',
           price: 6000,
           isAvailable: true,
           createdAt: new Date(),

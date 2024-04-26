@@ -9,6 +9,7 @@ export default function eventValidation(data) {
     availableTickets: Joi.number().integer().min(0).required(),
     time: Joi.string().required(),
     price: Joi.number().precision(2).min(0).required(),
+    image: Joi.string().uri(),
   });
   return schema.validate(data, {
     abortEarly: false,
