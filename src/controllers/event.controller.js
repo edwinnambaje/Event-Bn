@@ -162,6 +162,7 @@ class EventController {
           message: 'Event not found',
         });
       }
+      await Booking.destroy({ where: { eventId } });
       await Event.destroy({ where: { eventId } });
       return res.status(200).json({
         status: 'success',
@@ -191,11 +192,20 @@ class EventController {
         include: [
           {
             model: User,
-            attributes: ['userId', 'firstName', 'lastName', 'email'],
+            attributes: [
+              'userId',
+              'firstName',
+              'lastName',
+              'email',
+              'role',
+              'phoneNumber',
+              'createdAt',
+              'updatedAt',
+            ],
           },
         ],
       });
-      const attendees = bookings.map((booking) => booking.user);
+      const attendees = bookings.map((booking) => booking.User);
       return res.status(200).json({
         status: 'success',
         data: attendees,
