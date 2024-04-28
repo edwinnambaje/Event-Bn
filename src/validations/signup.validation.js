@@ -2,8 +2,7 @@ import joi from 'joi';
 
 async function SignUpValidation(data) {
   const schema = joi.object({
-    firstName: joi.string().min(3).required().label('firstName'),
-    lastName: joi.string().min(3).required().label('lastName'),
+    username: joi.string().min(3).required().label('username'),
     email: joi.string().email().label('email'),
     phoneNumber: joi.number().required().label('phoneNumber'),
     password: joi

@@ -206,5 +206,25 @@ class UserController {
       return res.status(500).json({ status: 'error', error: error.message });
     }
   }
+  static async updateUser(req, res) {
+    try {
+      const { userId } = req.params;
+      const { firstName, lastName, email, phoneNumber } = req.body;
+      await User.update(
+        { firstName, lastName, email, phoneNumber },
+        { where: { userId } },
+      );
+      const user = await User.findOne({
+        where: { userId },
+        attributes: { exclude: ['password'] },
+      });
+      return res.status(200).json({
+        status: 'success',
+        data: user,
+      });
+    } catch (error) {
+      return res.status(500).json({ status: 'error', error: error.message });
+    }
+  }
 }
 export default UserController;

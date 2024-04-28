@@ -1,6 +1,6 @@
 import model from '../database/models';
 
-const { Booking, Event } = model;
+const { Booking, Event, User } = model;
 
 class BookingController {
   static async createBooking(req, res) {
@@ -203,7 +203,7 @@ class BookingController {
   static async findAllBookings(req, res) {
     try {
       const bookings = await Booking.findAll({
-        include: Event,
+        include: [Event, User],
       });
       return res.status(200).json({
         status: 'success',

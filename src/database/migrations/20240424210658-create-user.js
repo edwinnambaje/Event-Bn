@@ -10,11 +10,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
+      username: {
         type: Sequelize.STRING,
         allowNull: false,
       },

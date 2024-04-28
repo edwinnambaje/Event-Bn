@@ -30,4 +30,10 @@ router.delete(
   UserController.deleteUser,
 );
 router.put('/profile', isAuthenticated, UserController.updateProfile);
+router.put(
+  '/update/:userId',
+  isAuthenticated,
+  checkRole('admin'),
+  UserController.updateUser,
+);
 export default router;

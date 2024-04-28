@@ -8,6 +8,7 @@ import allRoutes from './routes/index';
 
 env.config();
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
@@ -18,7 +19,6 @@ app.get('/api/v1', (req, res) => {
 });
 app.use(allRoutes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger));
-app.use(cors());
 
 app.use((req, res) => {
   return res.status(404).json({ status: 'fail', message: 'Page not found' });

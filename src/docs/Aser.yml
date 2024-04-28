@@ -11,12 +11,9 @@
           schema:
             type: object
             properties:
-              firstName:
+              username:
                 type: string
-                example: Nambaje
-              lastName:
-                type: string
-                example: Edwin
+                example: Nambaje Edwin
               email:
                 type: string
                 format: email
@@ -99,12 +96,9 @@
           schema:
             type: object
             properties:
-              firstName:
+              username:
                 type: string
-                example: Nambaje
-              lastName:
-                type: string
-                example: Edwin
+                example: Nambaje Edwin
               email:
                 type: string
                 format: email

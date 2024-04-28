@@ -8,7 +8,7 @@ const User = model.User;
 
 class UserService {
   static async register(data) {
-    const { firstName, lastName, email, phoneNumber, password } = data;
+    const { username, email, phoneNumber, password } = data;
     const foundUser = await User.findOne({
       where: {
         [Op.or]: [{ email }, { phoneNumber }],
@@ -19,8 +19,7 @@ class UserService {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
-      firstName,
-      lastName,
+      username,
       email,
       phoneNumber,
       password: hashedPassword,
