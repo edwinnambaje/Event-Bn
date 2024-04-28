@@ -23,8 +23,8 @@ class EventController {
         });
       }
       let posterUrl;
-      if (req.file !== undefined) {
-        const file = req.file.path;
+      if (req.body.image !== undefined) {
+        const file = req.body.image;
         const link = await cloudinary.uploader.unsigned_upload(
           file,
           'swtlatfg',
@@ -46,6 +46,7 @@ class EventController {
         data: event,
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         status: 'error',
         error: error.message,
@@ -96,7 +97,7 @@ class EventController {
   static async updateEvent(req, res) {
     try {
       const { eventId } = req.params;
-      const { name, description, location, date, time } = req.body;
+      const { name, description, location, date, time, image } = req.body;
       if (name) {
         await Event.update({ name }, { where: { eventId } });
       }
@@ -113,8 +114,8 @@ class EventController {
         await Event.update({ time }, { where: { eventId } });
       }
       let posterUrl;
-      if (req.file !== undefined) {
-        const file = req.file.path;
+      if (image !== undefined) {
+        const file = req.body.image;
         const link = await cloudinary.uploader.unsigned_upload(
           file,
           'swtlatfg',

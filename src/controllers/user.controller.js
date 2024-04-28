@@ -198,6 +198,12 @@ class UserController {
           message: 'User not found',
         });
       }
+      if (userId === req.user.userId) {
+        return res.status(403).json({
+          status: 'fail',
+          message: 'You cannot delete your own account',
+        });
+      }
       await User.destroy({ where: { userId } });
       return res.status(200).json({
         status: 'success',

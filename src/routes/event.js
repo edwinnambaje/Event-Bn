@@ -20,6 +20,7 @@ router.put(
   '/update/:eventId',
   isAuthenticated,
   checkRole('admin'),
+  upload.single('image'),
   EventController.updateEvent,
 );
 router.delete(
