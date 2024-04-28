@@ -15,7 +15,6 @@ class EventController {
         availableTickets,
         price,
       } = req.body;
-      console.log(req.file);
       const existingEvent = await Event.findOne({ where: { name } });
       if (existingEvent) {
         return res.status(400).json({
@@ -47,7 +46,6 @@ class EventController {
         data: event,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({
         status: 'error',
         error: error.message,

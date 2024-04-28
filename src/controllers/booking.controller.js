@@ -58,6 +58,7 @@ class BookingController {
       const { userId } = req.user;
       const bookings = await Booking.findAll({
         where: { userId },
+        include: [Event, User],
       });
       return res.status(200).json({
         status: 'success',
