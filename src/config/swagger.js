@@ -4,7 +4,7 @@ import env from 'dotenv';
 env.config();
 
 const swaggerServer =
-  process.env.SWAGGER_SERVER || 'http://localhost:4002/api/v1';
+  process.env.SWAGGER_SERVER || 'https://event-bn.onrender.com/api/v1';
 
 const options = {
   definition: {
