@@ -70,6 +70,7 @@ class UserController {
         data: {
           identifier: identifier,
           token,
+          user,
           expiration: formattedExpiration,
           message: 'Login Successful',
         },
