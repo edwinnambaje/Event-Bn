@@ -24,7 +24,7 @@ router.put(
   UserController.changePassword,
 );
 router.delete(
-  '/:id',
+  '/:userId',
   isAuthenticated,
   checkRole('admin'),
   UserController.deleteUser,
