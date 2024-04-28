@@ -112,6 +112,18 @@ class EventController {
       if (time) {
         await Event.update({ time }, { where: { eventId } });
       }
+      let posterUrl;
+      if (req.file !== undefined) {
+        const file = req.file.path;
+        const link = await cloudinary.uploader.unsigned_upload(
+          file,
+          'swtlatfg',
+        );
+        posterUrl = link.secure_url;
+      }
+      if (posterUrl) {
+        await Event.update({ image: posterUrl }, { where: { eventId } });
+      }
       const event = await Event.findOne({
         where: { eventId },
       });
