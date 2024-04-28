@@ -96,9 +96,9 @@ class EventController {
   static async updateEvent(req, res) {
     try {
       const { eventId } = req.params;
-      const { title, description, location, date, time } = req.body;
-      if (title) {
-        await Event.update({ title }, { where: { eventId } });
+      const { name, description, location, date, time } = req.body;
+      if (name) {
+        await Event.update({ name }, { where: { eventId } });
       }
       if (description) {
         await Event.update({ description }, { where: { eventId } });
