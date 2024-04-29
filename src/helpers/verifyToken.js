@@ -3,12 +3,6 @@ import { Jwt } from './jwt';
 
 async function isAuthenticated(req, res, next) {
   try {
-    if (!req.user) {
-      return res.status(401).json({
-        status: 'fail',
-        message: 'User not logged in',
-      });
-    }
     const { authorization } = req.headers;
     if (!authorization) {
       return res
@@ -18,6 +12,11 @@ async function isAuthenticated(req, res, next) {
     const token = authorization.split(' ')[1];
     try {
       const decodedToken = Jwt.verifyToken(token);
+      if (!decodedToken) {
+        return res
+          .status(401)
+          .json({ status: 'fail', message: 'User not logged in' });
+      }
       const { email } = decodedToken.value;
       const user = await User.findOne({
         where: { email },
