@@ -17,6 +17,12 @@ class BookingController {
           message: 'Event not found',
         });
       }
+      if (tickets < 1) {
+        return res.status(400).json({
+          status: 'fail',
+          message: 'You must book at least one ticket',
+        });
+      }
       const existingBooking = await Booking.findOne({
         where: { eventId: id, userId },
       });
