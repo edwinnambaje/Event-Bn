@@ -6,12 +6,6 @@ class BookingController {
   static async createBooking(req, res) {
     try {
       const { id } = req.params;
-      if (!req.user) {
-        return res.status(401).json({
-          status: 'fail',
-          message: 'User not logged in',
-        });
-      }
       const { userId } = req.user;
       const { tickets } = req.body;
       const event = await Event.findOne({
