@@ -1,7 +1,6 @@
 import model from '../database/models';
 
 const { Booking, Event, User } = model;
-
 class BookingController {
   static async createBooking(req, res) {
     try {
