@@ -97,7 +97,15 @@ class EventController {
   static async updateEvent(req, res) {
     try {
       const { eventId } = req.params;
-      const { name, description, location, date, time, image } = req.body;
+      const {
+        name,
+        description,
+        location,
+        date,
+        time,
+        image,
+        availableTickets,
+      } = req.body;
       if (name) {
         await Event.update({ name }, { where: { eventId } });
       }
@@ -112,6 +120,9 @@ class EventController {
       }
       if (time) {
         await Event.update({ time }, { where: { eventId } });
+      }
+      if (availableTickets) {
+        await Event.update({ availableTickets }, { where: { eventId } });
       }
       let posterUrl;
       if (image !== undefined) {
