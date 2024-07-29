@@ -7,7 +7,7 @@
     "test": "better-npm-run test",
     "dev": "better-npm-run dev",
     "build": "babel src -d dist",
-    "start": "npm run build && better-npm-run prod",
+    "start": "npm run build && npm run migrate:all && better-npm-run prod",
     "migrate": "sequelize-cli db:migrate",
     "undo-migrate": "sequelize-cli db:migrate:undo:all",
     "seed": "sequelize-cli db:seed:all",
